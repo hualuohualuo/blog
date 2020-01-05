@@ -6,17 +6,17 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    name: '登录'
+  },
+  {
     path: '/',
     redirect: '/home/index'
   }
 ]
 
 export const navList = [
-  {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    name: '登录'
-  },
   {
     path: '/home',
     component: Layout,
