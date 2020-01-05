@@ -1,29 +1,72 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Layout from '@/Layout/index'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    redirect: '/home/index'
+  }
+]
+
+export const navList = [
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    name: '登录'
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/home',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/Home/index'),
+        name: '主页',
+      }
+    ]
+  },
+  {
+    path: '/animation',
+    component: Layout,
+    children:[
+      {
+        path: 'index',
+        component: () => import('@/views/Animation/index'),
+        name: '动漫',
+      }
+    ]
+  },
+  {
+    path: '/game',
+    component: Layout,
+    children:[
+      {
+        path: 'index',
+        component: () => import('@/views/Game/index'),
+        name: '游戏',
+      }
+    ]
+  },
+  {
+    path: '/mine',
+    component: Layout,
+    children:[
+      {
+        path: 'index',
+        component: () => import('@/views/Mine/index'),
+        name: '我的',
+      }
+    ]
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: routes.concat(navList)
 })
 
 export default router
